@@ -105,7 +105,61 @@
         </div>
 
         <h1>Stránka se právě aktualizuje</h1>
-        <p>Na webu v tuto chvíli pracujeme, abychom vám přinesli nové funkce a vylepšení. Děkujeme za trpělivost, brzy budeme zpět.</p>
+        <p>Na webu v tuto chvíli pracujeme, abychom vám přinesli nové funkce a vylepšení. Děkujeme za trpělivost, brzy budeme zpět.
+        Zde je detailní specifikace funkcí, které chci do hry okamžitě přidat a přepracovat:
+
+1. Motor, křivka točivého momentu a reálné převody
+- Zrušit dosavadní lineární zrychlení "z ničeho".
+- Zavést simulaci otáček motoru (RPM) a křivku točivého momentu. Auto má největší tah v optimálním pásmu otáček, v nízkých otáčkách se "dusí" a u omezovače ztrácí sílu.
+- Převodovka: Každý rychlostní stupeň má jiný rozsah rychlostí a převodový poměr. Špatně zvolený stupeň znamená pomalou akceleraci. Řazení musí reálně ovlivňovat jízdu. (jen u manuálu)
+- Vyvážit maximální rychlosti aut.
+
+2. Měřítko a tratě
+- Délka tratí: Nastavit délku tratí na 2,5 až 5,5 km (čas na jedno kolo cca 1 až 3 minuty).
+- Přidat novou trať: NASCAR ovál (široký, rychlý okruh s klopenými zatáčkami).
+- Přidat 3 delší GT tratě
+
+3. Fyzika (Simcade model)
+- Přenos váhy (Weight Transfer): Při brzdění se váha přesouvá dopředu (lepší přilnavost vpředu, odlehčený a neklidný zadek), při akceleraci dozadu (trakce vzadu, horší zatáčení vpředu).
+- Opotřebení pneumatik: Během jízdy (hlavně při smycích a ostrém brzdění) se pneumatiky opotřebovávají a postupně ztrácí přilnavost.
+- Boxová ulička a Pit Stopy.
+
+4. Ideální stopa (Racing Line)
+- Dynamicky ji počítat z geometrie trati a schopností aktuálního auta.
+- Vizualizace barevnou čarou na trati: zelená (plný plyn), žlutá (ubrat/připravit se), červená (brzdit).
+- Možnost zapnout/vypnout v nastavení.
+
+5. Duch nejlepšího kola (Ghost Car) a záznam jízdy
+- Ukládat pozici a rotaci auta během kola. V dalším kole vykreslit poloprůhledné auto (ducha) představující hráčův nejlepší čas. (local storage)
+- Možnost vypnout/zapnout v nastavení.
+
+6. Uživatelské účty, profil a žebříčky
+- Lokální uživatelské účty v prohlížeči (localStorage) – přezdívka, avatar, ukládání postupu.
+- Automatické ukládání nejlepších časů, ghost záznamů, odemčených aut, nastavení z garáže k profilu.
+- Žebříčky (leaderboards) nejlepších časů na tratích podle hráčů a aut.
+
+7. AI soupeři
+- Řízení počítačových soupeřů po již spočítané ideální stopě.
+- Možnost nastavit obtížnost podle chybovosti a odchylky od stopy a brzdných bodů.
+- Možnost závodů (uzpůsobit trať’)
+
+8. Pravidla trati, prostředí a ovládání
+- Sektory a penalizace: Rozdělení tratí na sektory, měření mezičasů, delta čas
+- Počasí a denní doba: Varianta déšť (nižší přilnavost, delší brzdná dráha) a noc (funkční přední světlomety osvětlující trať).
+- Ovládání: dotykové ovládání pro mobily.
+
+9. Garáž, tuning, design aut a scenérie trati
+- Garáž a tuning: Odemykání nových aut za zajeté časy, úprava technických parametrů (převody, pneumatiky, přítlak, brzdy).
+- Design aut: Možnost měnit vizuální vzhled vozidel (barvy laku, polepy, doplňky).
+- Scenérie tratí: Přidat okolní objekty jako jsou tribuny s diváky, boxová ulička (pit lane), svodidla, stromy a budovy podél trati pro lepší atmosféru závodu.
+
+10. Nastavení
+- udělat stránku před zapnutím závodu nebo volného ježdění
+- umožni nastavit nižší kvalitu a omezení pro snížení fps a dej to do menu aby se člověk rozhodnul 
+
+11. Název
+- hra se jmenuje METO Racing
+</p>
         
         <div class="status-badge">Probíhá údržba</div>
     </div>
