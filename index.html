@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="cs">
-<head> <link rel="icon" type="image/png" href="ikona.png">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Probíhá aktualizace</title>
+    <title>METO Racing – Probíhá aktualizace</title>
     <style>
         * {
             margin: 0;
@@ -12,106 +12,329 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #0f172a;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #0b0f19;
             color: #f8fafc;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
             align-items: center;
             min-height: 100vh;
-            text-align: center;
-            overflow: hidden;
+            padding: 3rem 1rem;
         }
 
-        /* Styl pro červenobílé pruhy inspirované logem */
-        .stripe-container {
+        .container {
+            max-width: 720px;
             width: 100%;
-            height: 24px;
+            text-align: center;
+        }
+
+        /* Věrná rekonstrukce loga METO podle předlohy */
+        .meto-logo {
+            width: 160px;
+            height: 160px;
+            background-color: #ffffff;
+            margin: 0 auto 1.5rem auto;
+            border-radius: 16px;
+            padding: 16px 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 10px 30px rgba(255, 0, 0, 0.2);
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Horní řada červených čtverců s kouskem čtvrtého */
+        .logo-top {
+            display: flex;
+            gap: 22px;
+            padding-left: 8px;
+        }
+
+        .logo-top .sq {
+            width: 28px;
+            height: 28px;
+            background-color: #ff0000;
+            flex-shrink: 0;
+        }
+
+        /* Spodní červenobílý pruhovaný obrubník */
+        .logo-bottom {
+            height: 28px;
+            margin: 0 6px;
+            border: 1px solid rgba(255, 0, 0, 0.25);
             background: repeating-linear-gradient(
                 90deg,
-                #ffffff,
-                #ffffff 40px,
-                #ef4444 40px,
-                #ef4444 80px
+                #ffffff 0px,
+                #ffffff 26px,
+                #ff0000 26px,
+                #ff0000 52px
             );
         }
 
-        .content {
-            max-width: 600px;
-            padding: 2rem;
+        .brand-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
         }
 
-        /* Vykreslení grafického loga z čtverců */
-        .logo-blocks {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            margin-bottom: 2rem;
-        }
-
-        .logo-block {
-            width: 45px;
-            height: 45px;
-            background-color: #ef4444;
-            border-radius: 4px;
-            animation: pulse 2s infinite ease-in-out;
-        }
-
-        .logo-block:nth-child(2) { animation-delay: 0.3s; }
-        .logo-block:nth-child(3) { animation-delay: 0.6s; }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(0.85); opacity: 0.6; }
-        }
-
-        h1 {
-            font-size: 2.2rem;
-            margin-bottom: 1rem;
-            letter-spacing: -0.5px;
-        }
-
-        p {
-            font-size: 1.1rem;
-            color: #94a3b8;
-            line-height: 1.6;
+        .brand-title span {
+            color: #ff0000;
         }
 
         .status-badge {
             display: inline-block;
-            margin-top: 1.5rem;
-            padding: 0.5rem 1rem;
-            background-color: rgba(239, 68, 68, 0.15);
-            color: #ef4444;
-            border: 1px solid rgba(239, 68, 68, 0.3);
+            padding: 0.45rem 1.2rem;
+            background-color: rgba(255, 0, 0, 0.15);
+            color: #ff4d4d;
+            border: 1px solid rgba(255, 0, 0, 0.4);
             border-radius: 50px;
             font-size: 0.9rem;
             font-weight: 600;
+            margin-bottom: 1.25rem;
+        }
+
+        .subtitle {
+            color: #94a3b8;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            margin-bottom: 2.5rem;
+        }
+
+        /* Rozbalovací sekce (Changelog) */
+        .changelog-header {
+            text-align: left;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #e2e8f0;
+            margin-bottom: 1rem;
+            padding-left: 0.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .changelog-header::before {
+            content: "";
+            display: inline-block;
+            width: 4px;
+            height: 18px;
+            background-color: #ff0000;
+            border-radius: 2px;
+        }
+
+        .accordion {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            text-align: left;
+        }
+
+        details {
+            background-color: #131b2e;
+            border: 1px solid #1e293b;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: border-color 0.2s;
+        }
+
+        details[open] {
+            border-color: rgba(255, 0, 0, 0.5);
+        }
+
+        summary {
+            padding: 1rem 1.25rem;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+            transition: background-color 0.2s;
+        }
+
+        summary::-webkit-details-marker {
+            display: none;
+        }
+
+        summary:hover {
+            background-color: #19233c;
+        }
+
+        summary::after {
+            content: "+";
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #ff0000;
+            transition: transform 0.2s;
+        }
+
+        details[open] summary::after {
+            content: "−";
+        }
+
+        .details-content {
+            padding: 0 1.25rem 1.1rem 1.25rem;
+            color: #cbd5e1;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            border-top: 1px solid #1e293b;
+            padding-top: 0.85rem;
+        }
+
+        .details-content ul {
+            padding-left: 1.2rem;
+        }
+
+        .details-content li {
+            margin-bottom: 0.4rem;
+        }
+
+        .details-content li:last-child {
+            margin-bottom: 0;
         }
     </style>
 </head>
 <body>
 
-    <!-- Horní dekorativní pruh -->
-    <div class="stripe-container"></div>
-
-    <div class="content">
-        <!-- Logo složené ze čtverců (odpovídá stylu tvého obrázku) -->
-        <div class="logo-blocks">
-            <div class="logo-block"></div>
-            <div class="logo-block"></div>
-            <div class="logo-block"></div>
+    <div class="container">
+        <!-- Logo podle meto.png -->
+        <div class="meto-logo" title="METO Racing">
+            <div class="logo-top">
+                <div class="sq"></div>
+                <div class="sq"></div>
+                <div class="sq"></div>
+                <div class="sq"></div>
+            </div>
+            <div class="logo-bottom"></div>
         </div>
 
-        <h1>Stránka se právě aktualizuje</h1>
-        <p>Na webu v tuto chvíli pracujeme, abychom vám přinesli nové funkce a vylepšení. Děkujeme za trpělivost, brzy budeme zpět.
-    
-        <div class="status-badge">Probíhá údržba</div>
-    </div>
+        <h1 class="brand-title"><span>METO</span> Racing</h1>
+        <div class="status-badge">Stránka je dočasně nedostupná kvůli velké aktualizaci</div>
+        
+        <p class="subtitle">
+            Právě nasazujeme masivní update fyziky, nových tratí a herních režimů. 
+            Brzy opět vyrážíme na trať! Níže si můžeš rozkliknout, na čem právě pracujeme:
+        </p>
 
-    <!-- Dolní dekorativní pruh -->
-    <div class="stripe-container"></div>
+        <div class="changelog-header">Přehled novinek v připravované verzi</div>
+
+        <div class="accordion">
+            <details>
+                <summary>1. Motor, křivka točivého momentu a reálné převody</summary>
+                <div class="details-content">
+                    <ul>
+                        <li>Zrušení dosavadního lineárního zrychlení „z ničeho“.</li>
+                        <li>Simulace otáček motoru (RPM) a křivky točivého momentu – největší tah v optimálním pásmu, dušení v nízkých otáčkách a ztráta síly u omezovače.</li>
+                        <li>Reálná převodovka: každý stupeň má vlastní rozsah a poměr (u manuálního řazení špatně zvolený stupeň zpomalí akceleraci).</li>
+                        <li>Vyvážení maximálních rychlostí jednotlivých vozů.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details>
+                <summary>2. Měřítko a nové tratě</summary>
+                <div class="details-content">
+                    <ul>
+                        <li>Délka tratí nastavena na reálných 2,5 až 5,5 km (čas na jedno kolo cca 1 až 3 minuty).</li>
+                        <li>Nová trať: <strong>NASCAR ovál</strong> (široký, rychlý okruh s klopenými zatáčkami).</li>
+                        <li>Přidání <strong>3 delších GT tratí</strong>.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details>
+                <summary>3. Fyzika (Simcade model) a Pit Stopy</summary>
+                <div class="details-content">
+                    <ul>
+                        <li><strong>Přenos váhy (Weight Transfer):</strong> při brzdění se váha přesouvá dopředu (lepší grip vpředu, neklidný zadek), při akceleraci dozadu.</li>
+                        <li><strong>Opotřebení pneumatik:</strong> při smycích a tvrdém brzdění se gumy sjíždějí a ztrácejí přilnavost.</li>
+                        <li>Přidána boxová ulička a funkční <strong>Pit Stopy</strong>.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details>
+                <summary>4. Ideální stopa (Racing Line)</summary>
+                <div class="details-content">
+                    <ul>
+                        <li>Dynamický výpočet z geometrie trati a schopností aktuálního auta.</li>
+                        <li>Barevná vizualizace: zelená (plný plyn), žlutá (ubrat/připravit se), červená (brzdit).</li>
+                        <li>Možnost kdykoliv zapnout nebo vypnout v nastavení.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details>
+                <summary>5. Duch nejlepšího kola (Ghost Car) a záznam jízdy</summary>
+                <div class="details-content">
+                    <ul>
+                        <li>Ukládání pozice a rotace auta během kola do paměti (localStorage).</li>
+                        <li>Vykreslení poloprůhledného auta (ducha) tvého nejlepšího času v dalším kole.</li>
+                        <li>Možnost zapnout/vypnout v nastavení.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details>
+                <summary>6. Uživatelské účty, profil a žebříčky</summary>
+                <div class="details-content">
+                    <ul>
+                        <li>Lokální uživatelské účty v prohlížeči – přezdívka, avatar a ukládání postupu.</li>
+                        <li>Automatické ukládání nejlepších časů, ghost záznamů, odemčených aut a nastavení z garáže k profilu.</li>
+                        <li>Žebříčky (leaderboards) nejlepších časů na tratích podle hráčů a vozů.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details>
+                <summary>7. AI soupeři a závody</summary>
+                <div class="details-content">
+                    <ul>
+                        <li>Počítačoví soupeři využívající vypočítanou ideální stopu.</li>
+                        <li>Nastavitelná obtížnost podle chybovosti a odchylky od stopy a brzdných bodů.</li>
+                        <li>Plnohodnotný režim závodů s uzpůsobenými tratěmi.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details>
+                <summary>8. Pravidla trati, prostředí a ovládání</summary>
+                <div class="details-content">
+                    <ul>
+                        <li><strong>Sektory a penalizace:</strong> rozdělení tratí na sektory, měření mezičasů a delta čas.</li>
+                        <li><strong>Počasí a denní doba:</strong> déšť (nižší přilnavost, delší brzdná dráha) a noc (funkční světlomety osvětlující trať).</li>
+                        <li>Podpora dotykového ovládání pro mobilní telefony.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details>
+                <summary>9. Garáž, tuning, design aut a scenérie trati</summary>
+                <div class="details-content">
+                    <ul>
+                        <li><strong>Garáž a tuning:</strong> odemykání nových aut za zajeté časy, úprava převodů, pneumatik, přítlaku a brzd.</li>
+                        <li><strong>Design aut:</strong> úprava vzhledu vozidel (barvy laku, polepy, doplňky).</li>
+                        <li><strong>Scenérie tratí:</strong> tribuny s diváky, boxová ulička, svodidla, stromy a budovy podél trati.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details>
+                <summary>10. Nové předzávodní menu a optimalizace výkonu</summary>
+                <div class="details-content">
+                    <ul>
+                        <li>Nová úvodní obrazovka před spuštěním závodu nebo volného ježdění.</li>
+                        <li>Možnost snížit grafickou kvalitu a nastavit limit FPS přímo v menu pro plynulý chod i na slabších zařízeních.</li>
+                    </ul>
+                </div>
+            </details>
+        </div>
+    </div>
 
 </body>
 </html>
