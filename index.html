@@ -5,6 +5,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>METO Racing – Probíhá aktualizace</title>
+
+    <!-- Zde je úspěšně přidaný tvůj Firebase kód -->
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-analytics.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyApAujYoM1eoipNGW5HI1W1ryn7F0fKdAU",
+        authDomain: "meto-f237f.firebaseapp.com",
+        projectId: "meto-f237f",
+        storageBucket: "meto-f237f.firebasestorage.app",
+        messagingSenderId: "233531131302",
+        appId: "1:233531131302:web:53eeb6c3f164c844cffb67",
+        measurementId: "G-8Q9PCSFH5H"
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+    </script>
+
     <style>
         * {
             box-sizing: border-box;
@@ -1197,12 +1217,11 @@
             if (keys.s) {
                 if (state.gear > 0 && Math.abs(state.speed) < 0.02) state.gear = -1;
             }
-                       if (!state.isManual && state.gear > 0) {
+            if (!state.isManual && state.gear > 0) {
                 const curMax = G(state.gear).maxSpeed;
                 if (state.speed / curMax > 0.85 && state.gear < 5) state.gear++;
                 else if (state.gear > 1 && state.speed < G(state.gear - 1).maxSpeed * 0.5) state.gear--;
             } else if (state.isManual && state.gear > 1) {
-                // Automatické podřazení v manuálním režimu při poklesu rychlosti
                 if (state.speed < G(state.gear - 1).maxSpeed * 0.5) {
                     state.gear--;
                 }
